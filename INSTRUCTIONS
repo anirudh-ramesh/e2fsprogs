@@ -1,0 +1,20 @@
+Compiling and Linking filesystem utilities:
+1. Create an empty directory
+	mkdir build
+2. Navigate into the new directory
+	cd build
+3. Execute the following to generate utilities' binary files:
+	../configure
+	sudo make all install
+
+Employing filesystem utilities to create an image:
+1. Create an image file of approprate size filled with zeros
+	dd if=/dev/zero bs=1M count=64 of=dm365ext2.img
+2. Format the image file for an ext2 filesystem
+	./misc/mke2fs dm365ext2.img
+3. Mount image file to a directory
+	sudo mount -o loop dm365ext2.img ./filesystem
+4. Copy filesystem to the mounted directory
+	sudo cp -rf ~/ipnc_rdk/target/filesys_dm365/* ./filesystem/
+5. Unmount filesystem image from the directory
+	sudo umount ./filesystem/
